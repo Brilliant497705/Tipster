@@ -4,6 +4,7 @@ import * as IoIcons from 'react-icons/io';
 import * as FaIcons from 'react-icons/fa';
 import Identicon from 'identicon.js';
 import { RWebShare } from 'react-web-share';
+import { Link } from "react-router-dom";
 
 class Explore extends Component {
   state = {
@@ -45,15 +46,24 @@ class Explore extends Component {
 
                   <div className="card mb-4" key={key} >
                     <div className="card-header">
-                    <a href="/profile" >
-                      <img
-                        className='mr-2'
-                        width='30'
-                        height='30'
-                        src={`data:image/png;base64,${new Identicon(image.author, 30).toString()}`}
-                        alt='identicon'
-                      />
-                      </a>
+                    <Link
+                        to="/profile"
+                        state={{
+                          id: image.id.toString(),
+                          author: image.author,
+                        }}
+                      >
+                        <img
+                          className="mr-2"
+                          width="30"
+                          height="30"
+                          src={`data:image/png;base64,${new Identicon(
+                            image.author,
+                            30
+                          ).toString()}`}
+                          alt="identicon"
+                        />
+                      </Link>
                       <small className="text-muted">{image.author}</small>
                       <Button
                       className='float-right'
